@@ -8,7 +8,6 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var datetimeRouter = require('./routes/datetime')
 var blogRouter = require('./routes/blogs')
-var mynameRouter = require('./routes/myname')
 var app = express();
 
 // view engine setup
@@ -22,10 +21,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/users/', usersRouter);
+app.use('/users/myname', usersRouter);
 app.use('/datetime', datetimeRouter);
 app.use('/blogs', blogRouter);
-app.use('/myname', mynameRouter);
+app.use('/singleblog/:blogId', blogRouter)
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
